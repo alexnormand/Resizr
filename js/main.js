@@ -1,12 +1,13 @@
-(function(window, undefined){
+(function(window, $, undefined){
 
     var resizr =  {
 
 	drop: document.getElementById('drop'),
+	stretch: document.getElementById('stretch'),
 	canvas : document.querySelector('canvas'),
+	imgSrc : undefined,
 	widthInput: document.getElementById('width'),
 	heightInput: document.getElementById('height'),
-
 
 	handleDnD: function(e) {
 	    e.stopPropagation();
@@ -28,12 +29,17 @@
 			var ctx = r.canvas.getContext('2d'),
 			    img = new Image();
 
-			img.onload = function() {
-			    r.widthInput.value = r.canvas.height = img.height;
-			    r.heightInput.value = r.canvas.width  = img.width;
-			    ctx.drawImage(img, 0, 0, img.width, img.height);
-			};
-			img.src = e.target.result;
+			img.addEventListener('load', function() {
+			    r.widthInput.value = r.canvas.width = this.width;
+			    r.heightInput.value = r.canvas.height = this.height;
+
+			    r.stretch.style.width =  this.width + 'px';
+			    r.stretch.style.height = this.height + 'px';
+
+
+			    ctx.drawImage(this, 0, 0, this.width, this.height);
+			}, false);
+			img.src = resizr.imgSrc = e.target.result;
 		    };
 		})(resizr);
 
@@ -42,33 +48,49 @@
 	    }
 	},
 
-
 	scaleCanvas: function() {
 
-	    var ctx = resizr.canvas.getContext('2d');
+	    var ctx = resizr.canvas.getContext('2d'),
+                img = new Image(),
+                newCanvas = document.createElement('canvas'),
+		newCtx = newCanvas.getContext('2d'),
+                width  = parseInt(resizr.widthInput.value, 10),
+       		height = parseInt(resizr.heightInput.value, 10);
 
-	        console.log(parseInt(resizr.widthInput.value, 10), parseInt(resizr.heightInput.value, 10));
+	    resizr.canvas.width  = width;
+	    resizr.canvas.height = height;
 
-//                ctx.drawImage(resizr.canvas.toDataURL('img/png'), 0, 0 , parseInt(resizr.widthInput.value, 10), parseInt(resizr.heightInput.value, 10));
+	    resizr.canvas.style.width = width + 'px';
+	    resizr.canvas.style.height = height + 'px';
 
-/*
-		oSaveCanvas.width = iWidth;
-		oSaveCanvas.height = iHeight;
-		oSaveCanvas.style.width = iWidth+"px";
-		oSaveCanvas.style.height = iHeight+"px";
+	    img.addEventListener('load', function() {
 
-		var oSaveCtx = oSaveCanvas.getContext("2d");
+		newCanvas.width = resizr.width = img.width;
+		newCanvas.height = resizr.width = img.height;
+		newCtx.drawImage(img, 0, 0);
 
-		oSaveCtx.drawImage(oCanvas, 0, 0, oCanvas.width, oCanvas.height, 0, 0, iWidth, iHeight);
-		return oSaveCanvas;
+		ctx.drawImage(newCanvas, 0,0, width, height);
+	    }, false);
 
-	    return oCanvas;*/
+	    img.src = resizr.imgSrc;
+
 	},
 
-	//TODO
-	 saveImage: function() {
-	     window.location.href=document.getElementById('preview').src.replace('image/gif', 'img/octet-stream');
-	 },
+	// Save Image handler
+	saveImage: function() {
+
+	    var canvas = document.createElement('canvas'),
+                ctx    = canvas.getContext('2d'),
+                img    = new Image();
+
+	    img.addEventListener('load', function() {
+		canvas.width = resizr.widthInput.value;
+		canvas.height = resizr.heightInput.value;
+		ctx.drawImage(this, 0, 0, resizr.widthInput.value, resizr.heightInput.value);
+		window.location.href = canvas.toDataURL();
+	    }, false);
+	    img.src = resizr.imgSrc;
+	},
 
 	handleDragOver: function(evt) {
 	    evt.stopPropagation();
@@ -78,9 +100,15 @@
 
 	init: function() {
 
+	   $(this.stretch).resizable({ resize: function() {
+	       resizr.widthInput.value = $(this).width();
+	       resizr.heightInput.value = $(this).height();
+	   }});
+
 	    // Setup input listeners.
 	    this.widthInput.addEventListener('input', this.scaleCanvas, false);
 	    this.heightInput.addEventListener('input', this.scaleCanvas, false);
+	    document.getElementById('saveImg').addEventListener('click', this.saveImage, false);
 
 	    // Setup the dnd listeners.
 	    this.drop.addEventListener('dragover', this.handleDragOver, false);
@@ -90,5 +118,5 @@
 
     resizr.init();
 
-})(window);
+})(window, jQuery);
 
