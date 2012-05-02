@@ -7,13 +7,30 @@
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/style.css">
   <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-  <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
 </head>
-<body>
-  <!--[if lt IE 9]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+<body> 
+ <!--[if lt IE 7]>
+    <script type="text/javascript" 
+   src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+    <script>
+     // The conditional ensures that this code will only execute in IE,
+     // Therefore we can use the IE-specific attachEvent without worry
+     window.attachEvent("onload", function() {
+       CFInstall.check({
+         mode: "overlay"
+       });
+     });
+    </script>
+    <![endif]-->
 
+    <!--[if lt IE 9]>
+    <div class="alert-message warning">
+    <span class="icon-reminder"></span>
+      Our site works best in <a href="http://browsehappy.com/">modern browsers</a>.
+      We recommend upgrading or installing the
+      <a href="http://www.google.com/chromeframe">Google Chrome Frame</a> plugin for the best experience.
+    </div>
+    <![endif]-->
   <div class="nav-bar">
     <h1><a href="/">Resizr!!</a></h1>
       <input type="number" min="15" step="1" id="width"/>
