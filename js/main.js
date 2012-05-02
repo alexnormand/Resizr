@@ -12,6 +12,7 @@
 	handleDnD: function(e) {
 	    e.stopPropagation();
 	    e.preventDefault();
+	    resizr.drop.classList.remove('hover');
 
 	    var files = e.dataTransfer.files;
 
@@ -32,12 +33,18 @@
 			img.addEventListener('load', function() {
 			    r.widthInput.value = r.canvas.width = this.width;
 			    r.heightInput.value = r.canvas.height = this.height;
-
 			    r.stretch.style.width =  this.width + 'px';
 			    r.stretch.style.height = this.height + 'px';
-
-
 			    ctx.drawImage(this, 0, 0, this.width, this.height);
+
+
+			    var p1 = resizr.drop.querySelector('p'),
+                                p2 = resizr.drop.querySelectorAll('p')[1];
+			    p1.textContent= 'Now Resize your Image with the cursor. ' +
+                                           'Grab the right or bottom border and drag to the desired width or height.';
+ 
+			    p2.textContent = "When you're done click the 'Save' button to save your changes";
+
 			}, false);
 			img.src = resizr.imgSrc = e.target.result;
 		    };
@@ -95,7 +102,13 @@
 	handleDragOver: function(evt) {
 	    evt.stopPropagation();
 	    evt.preventDefault();
-	    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+	    evt.dataTransfer.dropEffect = 'copy'; 
+	},
+
+	handleDragEnterLeave: function(evt) {
+	    evt.stopPropagation();
+	    evt.preventDefault();
+	    resizr.drop.classList.toggle('hover');
 	},
 
 	init: function() {
@@ -112,11 +125,13 @@
 
 	    // Setup the dnd listeners.
 	    this.drop.addEventListener('dragover', this.handleDragOver, false);
+	    this.drop.addEventListener('dragleave', this.handleDragEnterLeave, false);
+	    this.drop.addEventListener('dragenter', this.handleDragEnterLeave, false);
 	    this.drop.addEventListener('drop', this.handleDnD, false);
 	}
     };
 
     resizr.init();
 
-})(window, jQuery);
+})(this, jQuery);
 
