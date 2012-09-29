@@ -1,0 +1,25 @@
+CACHE MANIFEST
+
+#version 1.0 9-29-2012
+
+CACHE:
+
+#images
+
+
+#internal HTML documents
+http://alexnormand.github.com/
+
+#style sheets
+http://alexnormand.github.com/Resizr/css/style.css
+http://fonts.googleapis.com/css?family=Lato
+
+#style sheet images
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB8ElEQVQ4T52TS0tbURSFvXndi2CqMWBIQkgiOBCKRQsOIgRFRPEJFosKHbSj/gD/R8cddaBiQRRpaCh0oFKKIPhAERRMCMSAI9sOWpKYxG9JJi2hMV7Y5Jx91lpn7bN3jKbHfWYkEpkyDGPGaJTv9/ubTdOcgOcmfjQkEI1Gn5RKpW5uniSO0un0RiMCdgRGK5XKWLlcXikWi8e5XO73QwVMyLNY7iAuiG+pVOqnyq8rEAqF2ux2+1OwcWxfQlxjXQ4Ggx6bzearJ+Dk5jiEF1hfpeY91oVwOGxBHmc98T8BkeeoNwD4APC+bHu93ha+V/f2DeO8poBsOxyOPsi9kK8gfgR/y80+9s9x08PZQSaTSdYS0JD0o74AaR3ytsjqv2VZY5CH2L+nnBO9xb8CatVLQJ0c7iByLNvV4XlNziK3UygUTrPZ7J+/uqAhITFAdBHXENerDybbMUQj2D7D9mcRwYeEvXegG5xOZw/ARW5IQk7Knh7M7XbHNTzkP5DfFz4QCLSDH2E5LAHVPA3oGfGJnp/JtloF6Q3nrUSCybuQbZFdLtdbcjec7xqQ59joj/Ern88nNJ4aEkCDCPqwncL2FzmSbfYxiB5+D8l/l8Ayh1u86qZeWxZpYzdtXGK5gpuvylXrHoY4T6nvyKsLTXfPnNtEmFuDJgAAAABJRU5ErkJggg==
+
+#javascript files
+http://www.google-analytics.com/ga.js
+http://alexnormand.github.com/Resizr/js/main.js
+
+NETWORK:
+*
