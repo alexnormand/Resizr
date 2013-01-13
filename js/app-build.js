@@ -1,9 +1,9 @@
 ({
     baseUrl: "./",
     out: "../build/js/main.js",
- 		paths : {	     
-	      order: 'lib/requirejs/order',
-	      jquery: 'lib/jquery-1.7.2.min',
+    paths : {
+        order: 'lib/requirejs/order',
+        jquery: 'lib/jquery-1.8.3.min',
         jqueryui: 'lib/jquery-ui-1.8.20.custom.min',
         resizr: 'resizr'
     },
